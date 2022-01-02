@@ -11,7 +11,10 @@ contract('VieroskaToken', function(accounts){
             assert.equal(name, 'Vieroska', 'Has the correct NAME');
             return tokenInstance.symbol();
         }).then(function(symbol){
-            assert.equal(symbol, 'VSK', 'Has the correct SYMBOL')
+            assert.equal(symbol, 'VSK', 'Has the correct SYMBOL')            
+            return tokenInstance.standard()
+        }).then(function(standard){
+            assert.equal(standard, 'Vieroska V1.0', 'Has the correct STANDARD')
         });
     });
 
