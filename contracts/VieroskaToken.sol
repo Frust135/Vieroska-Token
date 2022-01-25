@@ -6,12 +6,22 @@ contract VieroskaToken{
     string public symbol = "VSK";
     string public standard = "Vieroska V1.0";
     uint256 public totalSupply; // uint = Unasigned integer
+    
     event Transfer(
         address indexed _from,
         address indexed _to,
         uint256 _value
     );
+
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+    );
+
     mapping(address => uint256) public balanceOf; // Mapping is like hash dictionary
+    mapping(address => mapping(address => uint256)) public allowance; // Keep a hash from all address that our address have a approve
+
 
     // Constructors are public by default
     // Underscore is using for variables that aren't global
@@ -29,4 +39,14 @@ contract VieroskaToken{
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
+
+    // Approve
+    function approve(address _spender, uint256 _value) public returns (bool success){
+        allowance[msg.sender][_spender] = _value;
+
+        emit Approval(msg.sender, _spender, _value);
+
+        return true;
+    }
+
 }
